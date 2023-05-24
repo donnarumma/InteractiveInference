@@ -1,21 +1,42 @@
 %% function experiment=save_Statistical_figures(test_name,params)
-% test_name='OPEN_A15050_A25050_SIM_CA_P1'; params.forceTN=1:15; params.hmsub=2; params.ifplotKL_PRIORS_PLUS=1;
-% test_name='OPEN_A15050_A25050_SIM_CA_P1'; params.forceTN=1:30; params.ifplotImageScore=1;
 
 % test_name='OPEN_LF_A15050C_A25050_SIM_CA_P1'; forceTN=1:10;           hmsub=3;
 % test_name='OPEN_LF_A15050S_A25050_SIM_CA_P1'; params.forceTN=1:10; params.hmsub=3; params.ifplotKL_PRIORS_PLUS=1;
-% test_name='OPEN_LF_A15050S_A25050_SIM_CA_P1'; params.forceTN=1:10; params.ifplotKL_PRIORS_PLUS=1;
 
-% test_name='OPEN_LF_A15050C_A25050_SIM_CA_P1'; params.forceTN=1:10; params.ifplotKL_PRIORS_PLUS=1;
+% F3 bar    % test_name='OPEN_A15050_A25050_SIM_CA_P1';     params.forceTN=1:15; params.hmsub=2; params.ifplotKL_PRIORS_PLUS=1;
+% F3 inter  % test_name='OPEN_A15050_A25050_SIM_CA_P1';     params.forceTN=1:15; params.hmsub=2; params.ifplotKL_PRIORS_PLUS=1; params.ifbar=0;
+% F3 plot   % test_name='OPEN_A15050_A25050_SIM_CA_P1';     params.forceTN=1:15; params.hmsub=2; params.ifplotKL_PRIORS_PLUS=1; params.ifbar=3;
+% F3 plot2  % test_name='OPEN_A15050_A25050_SIM_CA_P1';     params.forceTN=1:15; params.hmsub=2; params.ifplotKL_PRIORS_PLUS=1; params.ifbar=2;
 
+% F5 bar    % test_name='OPEN_LF_A15050S_A25050_SIM_CA_P1'; params.forceTN=1:10; params.hmsub=3; params.ifplotKL_PRIORS_PLUS=1;
+% F5 inter  % test_name='OPEN_LF_A15050S_A25050_SIM_CA_P1'; params.forceTN=1:10; params.hmsub=3; params.ifplotKL_PRIORS_PLUS=1; params.ifbar=0;
+% F5 plot   % test_name='OPEN_LF_A15050S_A25050_SIM_CA_P1'; params.forceTN=1:10; params.hmsub=3; params.ifplotKL_PRIORS_PLUS=1; params.ifbar=3; 
+% F5 plot   % test_name='OPEN_LF_A15050S_A25050_SIM_CA_P1'; params.forceTN=1:10; params.hmsub=3; params.ifplotKL_PRIORS_PLUS=1; params.ifbar=2; 
 
 % test_name='OPEN_A15050_A25050_CONTRA';
 % test_name='OPEN_LF_A15050C_A25050_CONTRA';    forceTN=[1:6,15:18];    hmsub=3; % [1:6,15:18], 3
 
-% test_name='OPEN_LF_A15050C_A25050_CONTRA'; params.forceTN=1:10; params.hmsub=3; params.ifplotKL_PRIORS_PLUS=1;
+
+% test_name='OPEN_LF_A15050C_A25050_SIM_CA_P1'; params.forceTN=1:10; params.ifplotKL_PRIORS_PLUS=1;
+
+% S2 % test_name='OPEN_A15050_A25050_SIM_CA_P1'; params.forceTN=1:30; params.ifplotImageScore=1;
+% S3 % test_name='OPEN_A15050_A25050_RL'; params.forceTN=[5,2:4,1,6:30]; params.ifplotImageScore=1;  
+% S4 bar    % test_name='OPEN_A15050_A25050_RL'; params.forceTN=[2,3,4,6:8,9:13,20,15,5,24]; params.hmsub=2; params.ifplotKL_PRIORS_PLUS=1; params.removeOutliers=false; params.ma=1;
+% S4 inter  % test_name='OPEN_A15050_A25050_RL'; params.forceTN=[2,3,4,6:8,9:13,20,15,5,24]; params.hmsub=2; params.ifplotKL_PRIORS_PLUS=1; params.removeOutliers=false; params.ma=1; params.ifbar=0;
+% S4 plots2 % test_name='OPEN_A15050_A25050_RL'; params.forceTN=[2,3,4,6:8,9:13,20,15,5,24]; params.hmsub=2; params.ifplotKL_PRIORS_PLUS=1; params.removeOutliers=false; params.ma=1; params.ifbar=3;
+% S4 plots  % test_name='OPEN_A15050_A25050_RL'; params.forceTN=[2,3,4,6:8,9:13,20,15,5,24]; params.hmsub=2; params.ifplotKL_PRIORS_PLUS=1; params.removeOutliers=false; params.ma=1; params.ifbar=2;
+
+% S6 % test_name='OPEN_LF_A15050C_A25050_SIM_CA_P1'; params.forceTN=1:10; params.ifplotImageScore=1;
+
+% S7 bar    % test_name='OPEN_LF_A15050C_A25050_CONTRA'; params.forceTN=1:10; params.hmsub=3; params.ifplotKL_PRIORS_PLUS=1; params.removeOutliers=0; params.ma=3; 
+% S7 inter  % test_name='OPEN_LF_A15050C_A25050_CONTRA'; params.forceTN=1:10; params.hmsub=3; params.ifplotKL_PRIORS_PLUS=1; params.removeOutliers=0; params.ma=3; params.ifbar=0;
+% S7 plots2 % test_name='OPEN_LF_A15050C_A25050_CONTRA'; params.forceTN=1:10; params.hmsub=3; params.ifplotKL_PRIORS_PLUS=1; params.removeOutliers=0; params.ma=3; params.ifbar=3;
+% S7 plots  % test_name='OPEN_LF_A15050C_A25050_CONTRA'; params.forceTN=1:10; params.hmsub=3; params.ifplotKL_PRIORS_PLUS=1; params.removeOutliers=0; params.ma=3; params.ifbar=2;
 
 % test_name='OPEN_A15050_A25050_RL'; params.forceTN=[5,2:4,1,6:15]; params.hmsub=2; params.ifplotKL_PRIORS_PLUS=1; 
-% test_name='OPEN_A15050_A25050_RL'; params.forceTN=[5,2:4,1,6:30]; params.ifplotImageScore=1;  
+
+
+
 function experiment=save_Statistical_figures(test_name,params)
 save_dir=['~/tmp/DJOINT/' test_name];
 results_dir=['results_djoint/' test_name];
@@ -33,10 +54,19 @@ else
     LF_TEST=0;
 end
 try
+    removeOutliers=params.removeOutliers;
+catch
+    removeOutliers=true;
+end
+try
     forceTN=params.forceTN;
 catch
 end
-
+try
+    ma=params.ma;
+catch
+    ma=5;
+end
 ifloaddata              = 1;
 
 ifplotKL                = 0;
@@ -44,6 +74,9 @@ ifplotImageScore        = 0;
 ifplotKL_PLUS           = 0;
 ifplotKL_PRIORS_PLUS    = 0;
 ifplotSuccessRate       = 0;
+cmap_SuccessRate        = [0.2,0.2,0.2];
+cmap_Signaling          = [0.4,0.4,0.4];
+    
 try
     ifplotKL=params.ifplotKL;
 catch
@@ -56,7 +89,11 @@ try
     ifplotImageScore=params.ifplotImageScore;
 catch
 end
-
+try
+    ifbar=params.ifbar;
+catch
+    ifbar=1;
+end
 
 % forceTN=10; % force trial numbers;
 if ifloaddata
@@ -395,18 +432,18 @@ end
 if ifplotKL_PRIORS_PLUS %% KL_PRIORS_T1T2
     fs=12;
     times=1:Ntrials;
-    cmaps=[0.2,0.2,0.2];
-    
+    cmaps=cmap_SuccessRate;%[0.2,0.2,0.2];
     cmapsLight=[0.6,0.6,0.6];
 %    KL_T1T2_PRIORS=rmoutliers(KL_T1T2_PRIORS,'movmean',5);
 %     KL_T1T2_PRIORS=rmoutliers(KL_T1T2_PRIORS,'mean');
     newdeal=true;
-    ma=5; %8,30;
-    if newdeal
+    % ma=5; %8,30;
+    % ma=3;
+
+    if newdeal && removeOutliers
         for irm = 1:size(KL_T1T2_PRIORS,2)
     %         [~,~,locs]=rmoutliers(KL_T1T2_PRIORS,'mean');
             [~,~,locs]=rmoutliers(KL_T1T2_PRIORS,'percentiles',[2.5,97.5]);
-    %         [~,~,locs]=rmoutliers(KL_T1T2_PRIORS,'mean');
         end
         KL_T1T2_PRIORS(locs)=nan;
         sum(locs)
@@ -462,11 +499,26 @@ if ifplotKL_PRIORS_PLUS %% KL_PRIORS_T1T2
     dx=Ntrials/400;
     xlim([1-dx,Ntrials+dx]);
     dp=1/2;
-    if newdeal
-        hold off; 
-        bar(times, means,'facecolor',[1,1,1]*0.7); hold on;
-        errorbar(times,means,sigmas,'ko','linewidth',1);
-        xlim([1-dp,Ntrials+dp]);
+    if newdeal 
+        if ifbar == 1
+            hold off; 
+            bar(times, means,'facecolor',[1,1,1]*0.7); hold on;
+            errorbar(times,means,sigmas,'ko','linewidth',1);
+            xlim([1-dp,Ntrials+dp]);
+        elseif ifbar==2
+            hold off; 
+            
+            % bar(times, means,'facecolor',[1,1,1]*0.7); hold on;
+            plot(times, means,'k--','color',[1,1,1]*0.7,'linewidth',5); hold on;
+            errorbar(times,means,sigmas,'ko','linewidth',1);
+            xlim([1-dp,Ntrials+dp]);
+        elseif ifbar==3
+            hold off; 
+            % bar(times, means,'facecolor',[1,1,1]*0.7); hold on;
+            % plot(times, means,'k--','color',[1,1,1]*0.7,'linewidth',5); hold on;
+            errorbar(times,means,sigmas,'ko','linewidth',1);
+            xlim([1-dp,Ntrials+dp]);
+        end
     end
     ylabel ('KL divergence');
     xlabel('Trial')
@@ -489,7 +541,7 @@ if ifplotKL_PRIORS_PLUS %% KL_PRIORS_T1T2
     ylim([1-dp,Nreps+dp]);
  
     set(gca,'fontsize',fs);
-    bar(sum(tscore>0,2),'facecolor',[0.2,0.2,0.2])
+    bar(sum(tscore>0,2),'facecolor',cmap_SuccessRate);
     trials=1:Ntrials;
     xticks(trials);
     ylabel('Success Rate');
@@ -504,7 +556,7 @@ if ifplotKL_PRIORS_PLUS %% KL_PRIORS_T1T2
         means=smooth(means,ma,'moving');
     %     sigmas=smooth(st,ma,'moving');
 
-        bar(means(10:end),'facecolor',[0.2,0.2,0.2]);
+        bar(means(10:end),'facecolor',cmap_Signaling);
         xlabel('Trial');
         ylabel('Signaling');
         xticks(trials);

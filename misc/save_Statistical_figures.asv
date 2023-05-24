@@ -7,7 +7,7 @@
 % test_name='OPEN_LF_A15050S_A25050_SIM_CA_P1'; params.forceTN=1:10; params.ifplotKL_PRIORS_PLUS=1;
 
 % test_name='OPEN_LF_A15050C_A25050_SIM_CA_P1'; params.forceTN=1:10; params.ifplotKL_PRIORS_PLUS=1;
-
+% test_name='OPEN_LF_A15050C_A25050_SIM_CA_P1'; params.forceTN=1:10; params.ifplotImageScore=1;
 
 % test_name='OPEN_A15050_A25050_CONTRA';
 % test_name='OPEN_LF_A15050C_A25050_CONTRA';    forceTN=[1:6,15:18];    hmsub=3; % [1:6,15:18], 3
@@ -15,6 +15,10 @@
 % test_name='OPEN_LF_A15050C_A25050_CONTRA'; params.forceTN=1:10; params.hmsub=3; params.ifplotKL_PRIORS_PLUS=1;
 
 % test_name='OPEN_A15050_A25050_RL'; params.forceTN=[5,2:4,1,6:15]; params.hmsub=2; params.ifplotKL_PRIORS_PLUS=1; 
+
+% test_name='OPEN_A15050_A25050_RL';
+% params.forceTN=[2,3,4,6:8,9:13,15,5,24]; params.hmsub=2;
+% params.ifplotKL_PRIORS_PLUS=1; params.removeOutliers=false; params.ma=1;
 % test_name='OPEN_A15050_A25050_RL'; params.forceTN=[5,2:4,1,6:30]; params.ifplotImageScore=1;  
 function experiment=save_Statistical_figures(test_name,params)
 save_dir=['~/tmp/DJOINT/' test_name];
@@ -33,10 +37,19 @@ else
     LF_TEST=0;
 end
 try
+    removeOutliers=params.removeOutliers;
+catch
+    removeOutliers=true;
+end
+try
     forceTN=params.forceTN;
 catch
 end
-
+try
+    ma=params.ma;
+catch
+    ma=5;
+end
 ifloaddata              = 1;
 
 ifplotKL                = 0;
@@ -44,6 +57,9 @@ ifplotImageScore        = 0;
 ifplotKL_PLUS           = 0;
 ifplotKL_PRIORS_PLUS    = 0;
 ifplotSuccessRate       = 0;
+cmap_SuccessRate        = [0.2,0.2,0.2];
+cmap_Signaling          = [0.4,0.4,0.4];
+    
 try
     ifplotKL=params.ifplotKL;
 catch
@@ -395,18 +411,18 @@ end
 if ifplotKL_PRIORS_PLUS %% KL_PRIORS_T1T2
     fs=12;
     times=1:Ntrials;
-    cmaps=[0.2,0.2,0.2];
-    
+    cmaps=cmap_SuccessRate;%[0.2,0.2,0.2];
     cmapsLight=[0.6,0.6,0.6];
 %    KL_T1T2_PRIORS=rmoutliers(KL_T1T2_PRIORS,'movmean',5);
 %     KL_T1T2_PRIORS=rmoutliers(KL_T1T2_PRIORS,'mean');
     newdeal=true;
-    ma=5; %8,30;
-    if newdeal
+    % ma=5; %8,30;
+    % ma=3;
+
+    if newdeal && removeOutliers
         for irm = 1:size(KL_T1T2_PRIORS,2)
     %         [~,~,locs]=rmoutliers(KL_T1T2_PRIORS,'mean');
             [~,~,locs]=rmoutliers(KL_T1T2_PRIORS,'percentiles',[2.5,97.5]);
-    %         [~,~,locs]=rmoutliers(KL_T1T2_PRIORS,'mean');
         end
         KL_T1T2_PRIORS(locs)=nan;
         sum(locs)
@@ -461,10 +477,11 @@ if ifplotKL_PRIORS_PLUS %% KL_PRIORS_T1T2
     out.h(indh)=plot(times,means+sigmas,'linewidth',lw3,'color',c3);
     dx=Ntrials/400;
     xlim([1-dx,Ntrials+dx]);
+    dp=1/2;
     if newdeal
         hold off; 
-        bar(times, means); hold on;
-        errorbar(times,means,sigmas,'o');
+        bar(times, means,'facecolor',[1,1,1]*0.7); hold on;
+        errorbar(times,means,sigmas,'ko','linewidth',1);
         xlim([1-dp,Ntrials+dp]);
     end
     ylabel ('KL divergence');
@@ -481,7 +498,6 @@ if ifplotKL_PRIORS_PLUS %% KL_PRIORS_T1T2
 %     ylim([0,0.3]);
   %%%%%    2    %%%%%%%%%  
     subplot(hms,1,2);  hold on; box on; grid on;
-    dp=1/2;
     
 %     score=score';
    
@@ -489,7 +505,7 @@ if ifplotKL_PRIORS_PLUS %% KL_PRIORS_T1T2
     ylim([1-dp,Nreps+dp]);
  
     set(gca,'fontsize',fs);
-    bar(sum(tscore>0,2),'facecolor',[0.2,0.2,0.2])
+    bar(sum(tscore>0,2),'facecolor',cmap_SuccessRate);
     trials=1:Ntrials;
     xticks(trials);
     ylabel('Success Rate');
@@ -504,7 +520,7 @@ if ifplotKL_PRIORS_PLUS %% KL_PRIORS_T1T2
         means=smooth(means,ma,'moving');
     %     sigmas=smooth(st,ma,'moving');
 
-        bar(means(10:end),'facecolor',[0.2,0.2,0.2]);
+        bar(means(10:end),'facecolor',cmap_Signaling);
         xlabel('Trial');
         ylabel('Signaling');
         xticks(trials);
@@ -526,5 +542,5 @@ if ifplotKL_PRIORS_PLUS %% KL_PRIORS_T1T2
     savefig(hfig,[nf '.fig']);
     
 end
-convertEPS2PSD_cell({save_dir});
+convertEPS2PDF({save_dir});
 

@@ -13,6 +13,7 @@ end
 % tmp_dir     =[save_dir '/' test_name '/'];
 tmp_dir     = './';
 tmp_dir     = '../SharedContextBelief_V4/';
+tmp_dir     = '~/TESTS/INTERACTIVE_INFERENCE/';
 nfGK        = load ([tmp_dir test_name 'KL_POLICIES.mat']);
 
 GK1         = nfGK.GK1;
@@ -158,7 +159,7 @@ if wo(ind)
     xlabel('Trial')
     if newone
         xticks(1:Mtim)
-        ylabel('Expected FE');
+        ylabel('-EFE');
     else
         xticks(times)
         yticks(0.0:0.2:1.0);
@@ -182,7 +183,8 @@ if wo(ind)
 %     plot(entropy_A1s,pGSs,'ko','MarkerSize',6);
     plot(entropy_A1s,pGLs,'ko','MarkerSize',6);
     
-    xlabel('Entropy Belief White Agent');
+    % xlabel('Entropy Belief White Agent');
+    xlabel('Entropy of the joint goal context (White Agent)');
     ylabel('Prob of signaling policy');
     if wo(6)
         xlim([0.6,1]);
@@ -236,7 +238,9 @@ if wo(ind)
     plot(entropy_A1s,GLs,'o','MarkerSize',6,'color',ccmaps(1,:));
 %     plot(entropy_A1s,GSs,'o','MarkerSize',6,'color',cmaps(2,:));
     
-    xlabel('Entropy Belief White Agent');
+    % xlabel('Entropy Belief White Agent');
+    xlabel('Entropy of the joint goal context (White Agent)');
+    
     ylabel('Prob of signaling policy');
 %     xlim([-inf,1]);
 %     dy  =0.05;
@@ -250,7 +254,7 @@ if wo(ind)
    nf=[nf add];
 end
 %% save figure
-save_dir='traces/';
+save_dir='~/TESTS/INTERACTIVE_INFERENCE/';
 nf = [save_dir, nf];
 
 for iw=1:length(wo)

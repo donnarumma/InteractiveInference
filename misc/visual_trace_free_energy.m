@@ -28,7 +28,8 @@ p=[0,0,1500,1000];
 fs=14;
 set(hfig,'visible','off');
 set(gca,'fontsize',fs);
-ylabel('Expected Free Energy');
+% ylabel('Expected Free Energy');
+ylabel ('-EFE');
 if indAgent==1
     xlabel(['Policy of white agent']);
 elseif indAgent==2

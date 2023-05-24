@@ -5,7 +5,8 @@ params              = custom_simmetric_maze_open();
 
 T1.Ns               = [sum(params.MAZE(:)),4,sum(params.MAZE(:))];
 T1.Nu               = numel(params.MAZE);
-B                   = getB_MAZE2D_PAR_debug(T1,states,maze,1);
+% B                   = getB_MAZE2D_PAR_debug(T1,states,maze,1);
+B                   = getB_MAZE2D_PARAMS(T1,states,maze,1);
 params.mdp{1}{1}.B  = B;
 params.mdp{2}{1}.B  = B;
 params.source_images= './show/';
