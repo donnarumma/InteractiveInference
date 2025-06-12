@@ -46,7 +46,7 @@ indRepetition=100;indTrial=1;
 params=loadTrialRepetition(test_name,indRepetition,indTrial);
 
 ecode   = StatsFEvsEntropy(1000,params);
-save_PolicyKL(test_name);%tmp_PolicyKL(test_name,test_dir);
+save_Policy(KL(test_name);%tmp_PolicyKL(test_name,test_dir);
 
 save_Entropy_figures(test_name,ecode,[false,true,false,false,false,true]);
 
